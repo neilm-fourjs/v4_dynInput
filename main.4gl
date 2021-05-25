@@ -29,7 +29,7 @@ MAIN
 	DISPLAY m_cst.del_add.* TO addresses.*
 	DISPLAY m_cst.inv_add.* TO formonly.*
 
-	CALL m_ui.init("test", reflect.value.valueOf(m_cst))
+	CALL m_ui.init("customers", reflect.Value.valueOf(m_cst))
 
 	MENU
 		ON ACTION update
@@ -43,5 +43,12 @@ MAIN
 END MAIN
 --------------------------------------------------------------------------------
 FUNCTION cst_update()
-	CALL m_ui.inp(FALSE)
+	IF m_ui.inp(FALSE) THEN
+		DISPLAY "Record updated."
+		CALL m_ui.getRecord(reflect.Value.valueOf(m_cst))
+		DISPLAY "Customer Name: ", m_cst.cst.customer_name
+		DISPLAY "Del PC: ", m_cst.del_add.postal_code
+	ELSE
+		DISPLAY "Nothing changed."
+	END IF
 END FUNCTION
