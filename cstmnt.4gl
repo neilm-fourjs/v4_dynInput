@@ -18,7 +18,7 @@ MAIN
 		EXIT PROGRAM
 	END TRY
 
-	OPEN FORM f FROM "form"
+	OPEN FORM f FROM "cstmnt"
 	DISPLAY FORM f
 
 	SELECT * INTO m_cst.cst.* FROM customer WHERE customer_code = "C0001"

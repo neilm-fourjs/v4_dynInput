@@ -1,16 +1,25 @@
 
 export FGLPROFILE=./fglprofile
 
-all: main.42m
+all: cstmnt.42m stkmnt.42m
 
-main.42m: main.4gl form.42f
-	fglcomp --verbose --make main.4gl
+cstmnt.42m: cstmnt.4gl cstmnt.42f
+	fglcomp --verbose --make cstmnt.4gl
 
-form.42f: form.per
+stkmnt.42m: stkmnt.4gl stkmnt.42f
+	fglcomp --verbose --make stkmnt.4gl
+
+cstmnt.42f: cstmnt.per
+	fglform $^
+
+stkmnt.42f: stkmnt.per
 	fglform $^
 
 clean:
 	rm -f *.42?
 
-run: main.42m
-	fglrun main
+run: cstmnt.42m
+	fglrun cstmnt
+
+run2: stkmnt.42m
+	fglrun stkmnt

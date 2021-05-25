@@ -25,7 +25,7 @@ FUNCTION (this g2m_ui) init(l_nam STRING, l_r_val reflect.Value)
 	LET this.uiName = l_nam
 	CALL this.fields.clear()
 	LET this.fcnt = 0
-	CALL this.initFields(0, "mainValue", l_r_val)
+	CALL this.initFields(0,l_nam, l_r_val)
 	IF C_DEBUG THEN
 		DISPLAY "Field List:"
 		FOR i = 1 TO this.fcnt
@@ -50,6 +50,10 @@ FUNCTION (this g2m_ui) inp(l_new BOOLEAN) RETURNS BOOLEAN
 			CALL this.dia.setFieldValue(this.fields[x].nam, this.fields[x].val)
 		END IF
 	END FOR
+
+	IF NOT l_new THEN
+		CALL this.dia.setFieldActive( this.fields[1].nam, FALSE)
+	END IF
 
 	CALL this.dia.addTrigger("ON ACTION accept")
 	CALL this.dia.addTrigger("ON ACTION cancel")
@@ -132,9 +136,9 @@ FUNCTION (this g2m_ui) getRecord(l_rv reflect.Value)
 			LET l_rv_r = l_rv.getFieldByName(rnam)
 			IF l_rv_r IS NULL THEN
 				DISPLAY SFMT("Didn't find record '%1'", rnam)
+				LET l_rv_r = l_rv
 			END IF
 		ELSE
-			LET l_rv_r = l_rv
 			LET fnam   = this.fields[i].nam
 		END IF
 		LET l_rv_f = l_rv_r.getFieldByName(fnam)

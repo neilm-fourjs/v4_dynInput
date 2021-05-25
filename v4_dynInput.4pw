@@ -68,6 +68,11 @@
   <LanguageList version="1.0"/>
   <PlatformList version="1.0"/>
   <Group environment="value:FGLPROFILE=fglprofile" id="75644415" label="Group" language="Genero (no link)" targetDirectory="$(ProjectDir)">
+    <Application binaryName="cstmnt" dependencies="14000,1986" id="18736" label="cstmnt">
+      <Configuration binaryName="cstmnt" id="-1429969501" label="cstmnt"/>
+      <File filePath="cstmnt.4gl"/>
+      <File filePath="cstmnt.per"/>
+    </Application>
     <Library binaryName="Databases" id="1986" label="Databases">
       <File filePath="njm_demo310.4db"/>
     </Library>
@@ -75,10 +80,10 @@
       <File filePath="default.4ad"/>
       <File filePath="g2m_ui.4gl"/>
     </Library>
-    <Application binaryName="main" dependencies="14000,1986" id="18736" label="main">
-      <Configuration id="-1429969501" label="Application"/>
-      <File filePath="form.per"/>
-      <File filePath="main.4gl"/>
+    <Application binaryName="stkmnt" dependencies="1986,14000" id="-377111605" label="stkmnt">
+      <Configuration binaryName="stkmnt" id="-1178342770" label="stkmnt"/>
+      <File filePath="stkmnt.4gl"/>
+      <File filePath="stkmnt.per"/>
     </Application>
   </Group>
 </Project>

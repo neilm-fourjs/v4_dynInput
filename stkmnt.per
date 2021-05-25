@@ -1,0 +1,72 @@
+
+SCHEMA njm_demo310
+
+TOOLBAR
+	ITEM quit
+	ITEM accept 
+	ITEM cancel
+	ITEM update
+END -- TB
+
+LAYOUT (TEXT="Stock Maint", STYLE="main2")
+GRID
+{
+[l001    |f001    ]
+[l002    |f002      ]
+[l003    |f003      ]
+[l004    |f004      ]
+[l005    |f005         ]
+[l006    |f006                          ]
+[l007    |f007   ]
+[l008    |f008       ]
+[l009    |f009       ]
+[l010    |t]
+[l011    |dc]
+[l012    |f012   ]
+[l013    |f013   ]
+[l014    |f014   ]
+[l015    |f015                                              ]
+[l016    |f016   ]
+}
+END -- GRID
+
+TABLES
+stock
+
+ATTRIBUTES
+LABEL l001 : lab01, TEXT="stock_code:", JUSTIFY=RIGHT;
+LABEL l002 : lab02, TEXT="stock_cat:", JUSTIFY=RIGHT;
+LABEL l003 : lab03, TEXT="pack_flag:", JUSTIFY=RIGHT;
+LABEL l004 : lab04, TEXT="supp_code:", JUSTIFY=RIGHT;
+LABEL l005 : lab05, TEXT="barcode:", JUSTIFY=RIGHT;
+LABEL l006 : lab06, TEXT="description:", JUSTIFY=RIGHT;
+LABEL l007 : lab07, TEXT="colour_code:", JUSTIFY=RIGHT;
+LABEL l008 : lab08, TEXT="price:", JUSTIFY=RIGHT;
+LABEL l009 : lab09, TEXT="cost:", JUSTIFY=RIGHT;
+LABEL l010 : lab10, TEXT="tax_code:", JUSTIFY=RIGHT;
+LABEL l011 : lab11, TEXT="disc_code:", JUSTIFY=RIGHT;
+LABEL l012 : lab12 TEXT="physical_stock:", JUSTIFY=RIGHT;
+LABEL l013 : lab13, TEXT="allocated_stock:", JUSTIFY=RIGHT;
+LABEL l014 : lab14, TEXT="free_stock:", JUSTIFY=RIGHT;
+LABEL l015 : lab15, TEXT="long_desc:", JUSTIFY=RIGHT;
+LABEL l016 : lab16, TEXT="img_url:", JUSTIFY=RIGHT;
+
+f001 = stock.stock_code;
+f002 = stock.stock_cat;
+f003 = stock.pack_flag;
+f004 = stock.supp_code;
+f005 = stock.barcode;
+f006 = stock.description;
+f007 = stock.colour_code;
+f008 = stock.price;
+f009 = stock.cost;
+t = stock.tax_code;
+dc = stock.disc_code;
+f012 = stock.physical_stock;
+f013 = stock.allocated_stock;
+f014 = stock.free_stock;
+f015 = stock.long_desc;
+f016 = stock.img_url;
+
+INSTRUCTIONS
+SCREEN RECORD stk ( stock.* )
