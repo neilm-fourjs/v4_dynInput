@@ -67,7 +67,7 @@
   </Settings>
   <LanguageList version="1.0"/>
   <PlatformList version="1.0"/>
-  <Group id="75644415" label="Group" language="Genero (no link)" targetDirectory="$(ProjectDir)">
+  <Group environment="value:FGLPROFILE=fglprofile" id="75644415" label="Group" language="Genero (no link)" targetDirectory="$(ProjectDir)">
     <Library binaryName="Databases" id="1986" label="Databases">
       <File filePath="njm_demo310.4db"/>
     </Library>

@@ -1,4 +1,6 @@
 
+export FGLPROFILE=./fglprofile
+
 all: main.42m
 
 main.42m: main.4gl form.42f

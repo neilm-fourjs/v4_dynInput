@@ -1,6 +1,6 @@
 IMPORT reflect
 
-CONSTANT C_DEBUG = 0
+CONSTANT C_DEBUG = 1
 
 TYPE t_fieldList DYNAMIC ARRAY OF RECORD
 	nam    STRING,
@@ -23,6 +23,8 @@ END RECORD
 FUNCTION (this g2m_ui) init(l_nam STRING, l_r_val reflect.Value)
 	DEFINE i SMALLINT
 	LET this.uiName = l_nam
+	CALL this.fields.clear()
+	LET this.fcnt = 0
 	CALL this.initFields(0, "mainValue", l_r_val)
 	IF C_DEBUG THEN
 		DISPLAY "Field List:"
@@ -37,9 +39,8 @@ FUNCTION (this g2m_ui) inp(l_new BOOLEAN) RETURNS BOOLEAN
 	DEFINE x            SMALLINT
 	DEFINE l_evt, l_fld STRING
 	DEFINE l_updated    BOOLEAN = FALSE
-	DISPLAY "Input"
-	CALL ui.Dialog.setDefaultUnbuffered(TRUE)
 
+	CALL ui.Dialog.setDefaultUnbuffered(TRUE)
 	LET this.dia = ui.Dialog.createInputByName(this.fields)
 
 	FOR x = 1 TO this.fields.getLength()
@@ -98,6 +99,7 @@ FUNCTION (this g2m_ui) initFields(l_lev SMALLINT, l_nam STRING, l_rv reflect.Val
 	DEFINE i    SMALLINT
 	DEFINE l_rt reflect.Type
 	LET l_rt = l_rv.getType()
+
 	FOR i = 1 TO l_rt.getFieldCount()
 		IF C_DEBUG THEN
 			DISPLAY SFMT("%1%2 %3 %4 (%5) : %6",
@@ -116,7 +118,7 @@ FUNCTION (this g2m_ui) initFields(l_lev SMALLINT, l_nam STRING, l_rv reflect.Val
 	END FOR
 END FUNCTION
 --------------------------------------------------------------------------------
--- Get the updated record
+-- Update the passed record with the new values
 -- @param l_rv Reflect Value
 FUNCTION (this g2m_ui) getRecord(l_rv reflect.Value)
 	DEFINE l_rv_f, l_rv_r reflect.Value
@@ -148,12 +150,4 @@ FUNCTION (this g2m_ui) getRecord(l_rv reflect.Value)
 					this.fields[i].nam, this.fields[i].typ, this.fields[i].val, this.fields[i].newVal)
 		END FOR
 	END IF
-END FUNCTION
---------------------------------------------------------------------------------
--- Find a field in the record structure
--- @param l_lev debug nested level
--- @param l_nam record name
--- @param l_rv Reflect Value
--- @param l_debug display to terminal
-FUNCTION (this g2m_ui) findField(l_rv reflect.Value, l_debug BOOLEAN)
 END FUNCTION

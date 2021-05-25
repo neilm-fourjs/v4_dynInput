@@ -12,7 +12,7 @@ DEFINE m_ui g2m_ui
 MAIN
 
 	TRY
-		DATABASE njm_demo310
+		CONNECT TO "njm_demo310.db"
 	CATCH
 		CALL fgl_winMessage("DB Error", SQLERRMESSAGE, "exclamation")
 		EXIT PROGRAM
