@@ -1,0 +1,94 @@
+SCHEMA njm_demo310
+
+TOOLBAR
+	ITEM quit
+	ITEM accept 
+	ITEM cancel
+	ITEM update
+END -- TB
+
+LAYOUT (TEXT=%"Customer Maintenance", STYLE="", WINDOWSTYLE="main2")
+VBOX vbox1(STYLE="formborder")
+GRID Grid1
+{
+
+ [label1 |customer]                         [label6   |di]          [web_passwd ]
+ [label2 |customer_name                 ]   [label7   |credit_limi]
+ [label3 |contact_name                  ]   [label8   |total_invoices]
+ [label10|email                         ]   [label9   |outstanding_am]
+
+ <G group1                               > <G group2                               >
+ [label4 |del_addr   ]      [rec_key    ]  [label5 |inv_addr   ]      [rec_ke1    ]
+
+ [label11|line1                         ]  [label19|line6                         ]
+         [line2                         ]          [line7                         ]
+         [line3                         ]          [line8                         ]
+         [line4                         ]          [line9                         ]
+         [line5                         ]          [line0                         ]
+ [label16|postal_c]                        [label25|postal_1]
+ [label17|cou]                             [label24|co1]                   [samead]
+ <                                       > <                                       >
+}
+END -- Grid1
+END -- vbox1
+END -- cust_mnt
+
+TABLES
+customer,
+addresses
+
+ATTRIBUTES
+LABEL label1:Label1, TEXT=%"Code:", JUSTIFY=RIGHT;
+LABEL label6:Label6, TEXT=%"Discount:", JUSTIFY=RIGHT;
+LABEL label2:Label2, TEXT=%"Name:", JUSTIFY=RIGHT;
+LABEL label7:Label7, TEXT=%"Credit Limit:", JUSTIFY=RIGHT;
+LABEL label3:Label3, TEXT=%"Contact:", JUSTIFY=RIGHT;
+LABEL label8:Label8, TEXT=%"Total Invocies:", JUSTIFY=RIGHT;
+LABEL label10:Label10, TEXT=%"Email", JUSTIFY=RIGHT;
+LABEL label9:Label9, TEXT=%"Outstanding:", JUSTIFY=RIGHT;
+
+EDIT customer=customer.customer_code, TABINDEX=1, DOWNSHIFT, SCROLL;
+EDIT di=customer.disc_code, TABINDEX=5, UPSHIFT;
+EDIT web_passwd=customer.web_passwd, TABINDEX=28;
+EDIT customer_name=customer.customer_name, TABINDEX=2, SCROLL;
+EDIT credit_limi=customer.credit_limit, TABINDEX=4;
+EDIT contact_name=customer.contact_name, TABINDEX=3, SCROLL;
+EDIT total_invoices=customer.total_invoices, TABINDEX=6, DEFAULT="0", SCROLL;
+EDIT email=customer.email, TABINDEX=27, SCROLL;
+EDIT outstanding_am=customer.outstanding_amount, TABINDEX=7, SCROLL;
+
+GROUP group1:Group1, TEXT=%"Deliverly";
+LABEL label4:Label4, TEXT=%"del_addr", HIDDEN, JUSTIFY=RIGHT;
+LABEL label11:Label11, TEXT=%"Address:", JUSTIFY=RIGHT;
+LABEL label16:Label16, TEXT=%"Post Code:", JUSTIFY=RIGHT;
+LABEL label17:Label17, TEXT=%"Country:", JUSTIFY=RIGHT;
+EDIT del_addr=customer.del_addr, TABINDEX=8, NOENTRY, HIDDEN;
+EDIT rec_key=addresses.rec_key, TABINDEX=9, NOT NULL, HIDDEN;
+EDIT line1=addresses.line1, TABINDEX=10, SCROLL;
+EDIT line2=addresses.line2, TABINDEX=11, SCROLL;
+EDIT line3=addresses.line3, TABINDEX=12, SCROLL;
+EDIT line4=addresses.line4, TABINDEX=13, SCROLL;
+EDIT line5=addresses.line5, TABINDEX=14, SCROLL;
+EDIT postal_c=addresses.postal_code, TABINDEX=16, SCROLL;
+EDIT cou=addresses.country_code, TABINDEX=15;
+
+GROUP group2:Group2, TEXT=%"Invoice";
+LABEL label5:Label5, TEXT=%"inv_addr", HIDDEN, JUSTIFY=RIGHT;
+LABEL label25:Label25, TEXT=%"Post Code:", JUSTIFY=RIGHT;
+LABEL label19:Label19, TEXT=%"Address:", JUSTIFY=RIGHT;
+LABEL label24:Label24, TEXT=%"Country:", JUSTIFY=RIGHT;
+BUTTON samead:sameaddr, TABINDEX=26, TEXT=%"Default";
+EDIT inv_addr=customer.inv_addr, TABINDEX=17, NOENTRY, HIDDEN;
+EDIT rec_ke1=formonly.rec_key type INTEGER, TABINDEX=18, NOT NULL, HIDDEN;
+EDIT line6=formonly.line1 type VARCHAR, TABINDEX=19, SCROLL;
+EDIT line7=formonly.line2 type VARCHAR, TABINDEX=20, SCROLL;
+EDIT line8=formonly.line3 type VARCHAR, TABINDEX=21, SCROLL;
+EDIT line9=formonly.line4 type VARCHAR, TABINDEX=22, SCROLL;
+EDIT line0=formonly.line5 type VARCHAR, TABINDEX=23, SCROLL;
+EDIT postal_1=formonly.postal_code type VARCHAR, TABINDEX=25, SCROLL;
+EDIT co1=formonly.country_code type CHAR, TABINDEX=24;
+
+INSTRUCTIONS
+SCREEN RECORD cst (customer.*)
+SCREEN RECORD del_add (addresses.*)
+SCREEN RECORD inv_add (formonly.*)
